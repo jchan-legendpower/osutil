@@ -10,7 +10,6 @@
 package md5_crypt
 
 import (
-	"bytes"
 	"crypto/md5"
 
 	"github.com/tredoe/osutil/user/crypt"
@@ -38,23 +37,23 @@ func New() crypt.Crypter {
 }
 
 func (c *crypter) Generate(key, salt []byte) (string, error) {
-	if len(salt) == 0 {
-		salt = c.Salt.Generate(SaltLenMax)
-	}
-	if !bytes.HasPrefix(salt, c.Salt.MagicPrefix) {
-		return "", common.ErrSaltPrefix
-	}
+	// if len(salt) == 0 {
+	// 	salt = c.Salt.Generate(SaltLenMax)
+	// }
+	// if !bytes.HasPrefix(salt, c.Salt.MagicPrefix) {
+	// 	return "", common.ErrSaltPrefix
+	// }
 
-	saltToks := bytes.Split(salt, []byte{'$'})
+	//saltToks := bytes.Split(salt, []byte{'$'})
 
-	if len(saltToks) < 3 {
-		return "", common.ErrSaltFormat
-	} else {
-		salt = saltToks[2]
-	}
-	if len(salt) > 8 {
-		salt = salt[0:8]
-	}
+	//if len(saltToks) < 3 {
+	//	return "", common.ErrSaltFormat
+	//} else {
+	//	salt = saltToks[2]
+	//}
+	//if len(salt) > 8 {
+	//	salt = salt[0:8]
+	//}
 
 	// Compute alternate MD5 sum with input KEY, SALT, and KEY.
 	Alternate := md5.New()
